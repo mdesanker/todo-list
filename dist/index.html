@@ -11,14 +11,57 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap"
       rel="stylesheet"
     />
-
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
     <script defer src="main.js"></script>
   </head>
   <body>
     <header>
-      <img src="./images/check.png" alt="" />
-      <h1>To Do</h1>
+      <i class="far fa-sticky-note"></i>
+      <h1 id="page-name">To Do</h1>
     </header>
+    <main>
+      <div class="tabs">
+        <div class="view-container">
+          <button class="tab-btn" id="today">
+            <i class="fas fa-calendar-day"></i>
+            Today
+          </button>
+          <button class="tab-btn" id="week">
+            <i class="fas fa-calendar-week"></i>
+            This Week
+          </button>
+          <button class="tab-btn" id="month">
+            <i class="far fa-calendar"></i>
+            This Month
+          </button>
+        </div>
+        <div class="project-container">
+          <h2 class="project-header">Projects</h2>
+          <div class="project-list">
+            <button class="tab-btn project-item">
+              <i class="fas fa-tasks"></i>
+              Project 1
+              <i class="fas fa-times-circle hidden"></i>
+            </button>
+            <button class="tab-btn project-item">
+              <i class="fas fa-tasks"></i>
+              Project 2
+              <i class="fas fa-times-circle hidden"></i>
+            </button>
+          </div>
+          <button class="tab-btn" id="project">
+            <i class="fas fa-plus"></i>
+            Add Project
+          </button>
+        </div>
+      </div>
+      <div class="contents"></div>
+    </main>
     <footer>
       <p>Copyright © 2021 mdesanker</p>
     </footer>

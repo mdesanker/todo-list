@@ -1,5 +1,37 @@
 /* style.css */
+/* General CSS */
+:root {
+  --primary-dark: #1d3557;
+  --secondary-dark: #457b9d;
+  --primary-light: #a8dadc;
+  --secondary-light: #f1faee;
+  --contrast-color: #e63946;
+}
 * {
   padding: 0;
   margin: 0;
+}
+html {
+  font-family: "Roboto", sans-serif;
+}
+/* Header CSS */
+header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+header img {
+  transition: 1s ease-out;
+  height: 48px;
+  width: auto;
+}
+header img:hover {
+  transform: scale(1.2);
+}
+header h1 {
+  color: var(--primary-color);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  margin-left: 20px;
 }

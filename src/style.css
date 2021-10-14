@@ -35,3 +35,14 @@ header h1 {
   letter-spacing: 0.2rem;
   margin-left: 20px;
 }
+/* Footer CSS */
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+footer p {
+  letter-spacing: 0.1rem;
+  padding: 10px;
+}

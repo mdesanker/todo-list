@@ -25,7 +25,7 @@
       <h1 id="page-name">To Do</h1>
     </header>
     <main>
-      <div class="tabs">
+      <div class="sidebar">
         <div class="view-container">
           <button class="tab-btn" id="today">
             <i class="fas fa-calendar-day"></i>
@@ -60,7 +60,43 @@
           </button>
         </div>
       </div>
-      <div class="contents"></div>
+      <div class="display">
+        <div class="list-display-container">
+          <h2 class="list-header">Project 1</h2>
+          <ul class="display-container">
+            <li class="list-item">
+              <div class="list-item-main">
+                <div class="item-left">
+                  <i class="far fa-check-square"></i>
+                  <p class="task-title">Wash the dishes</p>
+                </div>
+                <div class="item-right">
+                  <p class="task-date">10/14/21</p>
+                  <i class="far fa-trash-alt"></i>
+                </div>
+              </div>
+              <p class="list-item-notes visible">
+                These are notes for the list item.
+              </p>
+            </li>
+            <li class="list-item">
+              <div class="list-item-main">
+                <div class="item-left">
+                  <i class="far fa-square"></i>
+                  <p class="task-title">Wash the dishes</p>
+                </div>
+                <div class="item-right">
+                  <p class="task-date">10/14/21</p>
+                  <i class="far fa-trash-alt"></i>
+                </div>
+              </div>
+              <p class="list-item-notes visible">
+                These are notes for the list item.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </main>
     <footer>
       <p>Copyright © 2021 mdesanker</p>

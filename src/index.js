@@ -84,7 +84,10 @@ const clearForm = function (e) {
 addProjectBtn.addEventListener("click", openForm);
 
 // Store projects in object
-const projectList = {};
+const projectList = {
+  "Project 1": {},
+  "Project 2": {},
+};
 
 // Add project name to object on form submission
 projectForm.addEventListener("submit", function (e) {
@@ -105,3 +108,35 @@ projectFormCancelBtn.addEventListener("click", function () {
   clearForm();
   closeForm();
 });
+
+function generateProjectList() {
+  const projectListContainer = document.querySelector(".project-list");
+  const projectItems = document.querySelectorAll(".project-item");
+
+  // Clear project list
+  projectItems.forEach((item) => {
+    projectListContainer.removeChild(item);
+  });
+
+  // Generate sidebar project list using projectList object
+  Object.keys(projectList).forEach((project) => {
+    const projectItem = document.createElement("button");
+    projectItem.classList.add("tab-btn");
+    projectItem.classList.add("project-item");
+    projectItem.textContent = project;
+    projectItem.insertAdjacentHTML(
+      "afterbegin",
+      "<i class='fas fa-tasks'></i>"
+    );
+    projectItem.insertAdjacentHTML(
+      "beforeend",
+      "<i class='fas fa-times-circle hidden'></i>"
+    );
+
+    projectListContainer.appendChild(projectItem);
+  });
+
+  return projectListContainer;
+}
+
+generateProjectList();

@@ -1,3 +1,5 @@
+"use strict";
+
 // Elements
 const addProjectBtn = document.querySelector(".add-project-btn");
 const projectFormContainer = document.querySelector(".project-form-container");
@@ -31,12 +33,15 @@ class Todo {
   }
 }
 
+const item1 = new Todo("Wash dishes");
+const item2 = new Todo("Get gas");
+
 addProjectBtn.addEventListener("click", openProjectForm);
 
 // Store projects in object
 const projectList = {
-  "Project 1": {},
-  "Project 2": {},
+  "Project 1": [item1, item2, item1, item2, item1, item2],
+  "Project 2": [],
 };
 
 // Add project name to object on form submission
@@ -90,4 +95,4 @@ function generateProjectList() {
   return projectListContainer;
 }
 
-export default generateProjectList;
+export { generateProjectList, projectList };

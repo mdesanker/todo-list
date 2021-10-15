@@ -23,12 +23,6 @@ main {
   display: flex;
   width: 100%;
 }
-.hidden {
-  opacity: 0;
-}
-.visible {
-  display: none;
-}
 /* Header CSS */
 header {
   display: flex;
@@ -108,7 +102,10 @@ main {
   gap: 10px;
   padding: 0 20px;
 }
-.project-input {
+.project-form-container {
+  padding-top: 10px;
+}
+#project-input {
   width: 100%;
   font-size: 18px;
   line-height: 2rem;
@@ -124,10 +121,10 @@ main {
   border: none;
   border-radius: 5px;
 }
-.add {
+.add-btn {
   background-color: var(--primary-light);
 }
-.cancel {
+.cancel-btn {
   background-color: var(--contrast-color);
 }
 /* Display CSS */
@@ -176,4 +173,11 @@ footer {
 footer p {
   letter-spacing: 0.1rem;
   padding: 10px;
+}
+/* Hide Element CSS */
+.hidden {
+  opacity: 0;
+}
+.not-visible {
+  display: none;
 }

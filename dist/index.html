@@ -54,21 +54,23 @@
               <i class="fas fa-times-circle hidden"></i>
             </button>
           </div>
-          <button class="tab-btn" id="project">
+          <button class="tab-btn add-project-btn">
             <i class="fas fa-plus"></i>
             Add Project
           </button>
-          <div class="project-form-container">
+          <div class="project-form-container not-visible">
             <form action="" class="add-project">
               <input
-                class="project-input"
+                id="project-input"
                 type="text"
                 placeholder="Enter name"
                 required
               />
               <div class="form-btns">
-                <button class="form-btn add">Add</button>
-                <button class="form-btn cancel">Cancel</button>
+                <button type="submit" class="form-btn add-btn">Add</button>
+                <button type="button" class="form-btn cancel-btn">
+                  Cancel
+                </button>
               </div>
             </form>
           </div>

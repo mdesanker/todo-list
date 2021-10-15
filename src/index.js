@@ -53,3 +53,55 @@ project1.forEach((item) => {
 });
 
 // Everytime todo item added to project, refresh display
+
+///////////////////////////////////////////////////
+
+// Add Project button functionality
+const addProjectBtn = document.querySelector(".add-project-btn");
+const projectFormContainer = document.querySelector(".project-form-container");
+const projectForm = document.querySelector(".add-project");
+const projectInput = document.querySelector("#project-input");
+const projectFormCancelBtn = document.querySelector(".cancel-btn");
+
+// Show project form on button click
+const openForm = function (e) {
+  e.preventDefault();
+  addProjectBtn.classList.add("not-visible");
+  projectFormContainer.classList.remove("not-visible");
+};
+
+// Close form
+const closeForm = function () {
+  addProjectBtn.classList.remove("not-visible");
+  projectFormContainer.classList.add("not-visible");
+};
+
+// Clear project form
+const clearForm = function (e) {
+  projectInput.value = "";
+};
+
+addProjectBtn.addEventListener("click", openForm);
+
+// Store projects in object
+const projectList = {};
+
+// Add project name to object on form submission
+projectForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  // Check that project name is available
+  if (Object.keys(projectList).includes(projectInput.value)) {
+    console.log(`Project name ${projectInput.value} is already taken.`);
+    return;
+  }
+  // Add project name to object
+  projectList[projectInput.value] = [];
+  clearForm();
+  closeForm();
+  console.log(projectList);
+});
+
+projectFormCancelBtn.addEventListener("click", function () {
+  clearForm();
+  closeForm();
+});

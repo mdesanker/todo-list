@@ -8,6 +8,5 @@ export function makeElement(element, classes = [], text = "") {
   if (text) {
     el.textContent = text;
   }
-  console.log(el);
   return el;
 }

@@ -16,28 +16,44 @@ function generateDisplay(project) {
     displayContainer.removeChild(child)
   );
 
-  displayContainer.appendChild(generateDisplayHeader(title));
+  // How to get project name here...
+  displayContainer.appendChild(makeElement("h2", ["list-header"], "Project 1"));
   displayContainer.appendChild(generateListContainer(project));
 }
 
 // How do I get the name of the project here...
-function generateDisplayHeader(header) {
-  const displayHeader = document.createElement("h2");
-  displayHeader.classList.add("list-header");
+// function generateDisplayHeader(header) {
+//   const displayHeader = makeElement("h2", ["list-header"], "header");
 
-  // Set header to header argument
-  displayHeader.textContent = header;
-
-  return displayHeader;
-}
+//   return displayHeader;
+// }
 
 function generateListContainer(project) {
-  const listContainer = document.createElement("ul");
-  listContainer.classList.add("list-container");
+  console.log(project);
+  const listContainer = makeElement("ul", ["list-container"]);
 
   for (const item of project) {
-    console.log(item);
-    const listItem = makeElement("li", ["list-item"], item.title);
+    // console.log(item);
+    const listItem = makeElement("li", ["list-item"]);
+    const listItemMain = makeElement("div", ["list-item-main"]);
+
+    // icon may need to add as insertAdjacentHTML
+    const itemLeft = makeElement("div", ["item-left"]);
+    itemLeft.insertAdjacentHTML("afterbegin", '<i class="far fa-square"></i>');
+    const taskTitle = makeElement("p", ["task-title"], item.title);
+    itemLeft.appendChild(taskTitle);
+    listItemMain.appendChild(itemLeft);
+
+    const itemRight = makeElement("div", ["item-right"]);
+    const date = makeElement("p", ["task-date"], item.dueDate);
+    itemRight.appendChild(date);
+    itemRight.insertAdjacentHTML(
+      "beforeend",
+      '<i class="far fa-trash-alt"></i>'
+    );
+    listItemMain.appendChild(itemRight);
+
+    listItem.appendChild(listItemMain);
 
     listContainer.appendChild(listItem);
   }

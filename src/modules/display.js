@@ -1,6 +1,6 @@
 "use strict";
 
-import projectList from "./projects";
+import { projectList } from "./projects";
 import { makeElement } from "./element";
 
 // Elements
@@ -8,7 +8,11 @@ const displayContainer = document.querySelector(".list-display-container");
 
 // This module will need to import to key for the project
 
+const project = projectList["Project 1"];
+console.log(project);
+
 const title = "Project 1";
+project[1].complete = true;
 
 function generateDisplay(project) {
   // Clear display container
@@ -20,7 +24,7 @@ function generateDisplay(project) {
   displayContainer.appendChild(makeElement("h2", ["list-header"], title));
 
   addListEventListener(project);
-  displayContainer.appendChild(generateListContainer(project));
+  displayContainer.appendChild(updateListContainer(project));
 }
 
 // How do I get the name of the project here...
@@ -30,7 +34,8 @@ function generateDisplay(project) {
 //   return displayHeader;
 // }
 
-function generateListContainer(project) {
+// Change name to updateDisplay
+function updateListContainer(project) {
   const listContainer = makeElement("ul", ["list-container"]);
 
   project.forEach((item, index) => {
@@ -39,9 +44,19 @@ function generateListContainer(project) {
 
     const listItemMain = makeElement("div", ["list-item-main"]);
 
-    // icon may need to add as insertAdjacentHTML
+    // Add icon with insertAdjacentHTML so HTML is parsed
     const itemLeft = makeElement("div", ["item-left"]);
-    itemLeft.insertAdjacentHTML("afterbegin", '<i class="far fa-square"></i>');
+    if (item.complete === true)
+      itemLeft.insertAdjacentHTML(
+        "afterbegin",
+        '<i class="far fa-check-square"></i>'
+      );
+    else
+      itemLeft.insertAdjacentHTML(
+        "afterbegin",
+        '<i class="far fa-square"></i>'
+      );
+
     const taskTitle = makeElement("p", ["task-title"], item.title);
     itemLeft.appendChild(taskTitle);
     listItemMain.appendChild(itemLeft);
@@ -66,6 +81,13 @@ function generateListContainer(project) {
     listContainer.appendChild(listItem);
 
     // Modify display if item completed (separate function)
+    if (item.complete === "true") {
+      // Put check mark in box
+      document.querySelector(".complete-marker").classList.remove("fa-square");
+      document
+        .querySelector(".complete-marker")
+        .classList.add("fa-check-square");
+    }
   });
 
   return listContainer;

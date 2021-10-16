@@ -1,5 +1,7 @@
 "use strict";
 
+import { makeElement } from "./element";
+
 // Elements
 const addProjectBtn = document.querySelector(".add-project-btn");
 const projectFormContainer = document.querySelector(".project-form-container");
@@ -76,11 +78,13 @@ function generateProjectList() {
   });
 
   // Generate sidebar project item for each project in list
-  Object.keys(projectList).forEach((project) => {
-    const projectItem = document.createElement("button");
-    projectItem.classList.add("tab-btn");
-    projectItem.classList.add("project-item");
-    projectItem.textContent = project;
+  Object.keys(projectList).forEach((project, index) => {
+    const projectItem = makeElement(
+      "button",
+      ["tab-btn", "project-item"],
+      project
+    );
+    projectItem.dataset.id = index;
     projectItem.insertAdjacentHTML(
       "afterbegin",
       "<i class='fas fa-tasks'></i>"
@@ -89,8 +93,15 @@ function generateProjectList() {
       "beforeend",
       "<i class='fas fa-times-circle hidden'></i>"
     );
+    console.log(projectItem);
 
     projectListContainer.appendChild(projectItem);
+  });
+
+  // Add event listener to project list
+  projectListContainer.addEventListener("click", function (e) {
+    const clicked = e.target.closest("button");
+    console.log(clicked);
   });
 
   return projectListContainer;

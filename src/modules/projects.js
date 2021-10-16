@@ -30,11 +30,12 @@ class Todo {
     this.dueDate = dueDate;
     this.description = description;
     this.priority = priority;
+    this.complete = false;
   }
 }
 
-const item1 = new Todo("Wash dishes");
-const item2 = new Todo("Get gas");
+const item1 = new Todo("Wash dishes", "10/16/2021", "Sink is very dirty");
+const item2 = new Todo("Get gas", "10/15/2021", "Low tank");
 
 addProjectBtn.addEventListener("click", openProjectForm);
 

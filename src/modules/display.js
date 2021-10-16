@@ -17,7 +17,9 @@ function generateDisplay(project) {
   );
 
   // How to get project name here...
-  displayContainer.appendChild(makeElement("h2", ["list-header"], "Project 1"));
+  displayContainer.appendChild(makeElement("h2", ["list-header"], title));
+
+  addListEventListener(project);
   displayContainer.appendChild(generateListContainer(project));
 }
 
@@ -29,12 +31,12 @@ function generateDisplay(project) {
 // }
 
 function generateListContainer(project) {
-  console.log(project);
   const listContainer = makeElement("ul", ["list-container"]);
 
-  for (const item of project) {
-    // console.log(item);
+  project.forEach((item, index) => {
     const listItem = makeElement("li", ["list-item"]);
+    listItem.dataset.id = index;
+
     const listItemMain = makeElement("div", ["list-item-main"]);
 
     // icon may need to add as insertAdjacentHTML
@@ -52,13 +54,39 @@ function generateListContainer(project) {
       '<i class="far fa-trash-alt"></i>'
     );
     listItemMain.appendChild(itemRight);
-
     listItem.appendChild(listItemMain);
 
+    const notes = makeElement(
+      "p",
+      ["list-item-notes", "not-visible"],
+      item.description
+    );
+    listItem.appendChild(notes);
+
     listContainer.appendChild(listItem);
-  }
+
+    // Modify display if item completed (separate function)
+  });
 
   return listContainer;
+}
+
+function addListEventListener(project) {
+  displayContainer.addEventListener("click", function (e) {
+    console.log(e.target);
+    // const clicked = e.target.closest(".list-item");
+    // if (!clicked) return;
+    // console.log(clicked);
+
+    if (e.target.classList.contains("far")) {
+      e.target.classList.toggle("fa-square");
+      e.target.classList.toggle("fa-check-square");
+      // Use data attribute to identify clicked item
+      const clickedIndex = e.target.closest(".list-item").dataset.id;
+      project[clickedIndex].complete = true;
+      console.log(project[clickedIndex]);
+    }
+  });
 }
 
 {

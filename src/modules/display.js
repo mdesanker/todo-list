@@ -2,6 +2,7 @@
 
 import { projectList } from "./projects";
 import { makeElement } from "./element";
+import { generateAddTaskBtn } from "./taskform";
 
 // Elements
 const displayContainer = document.querySelector(".list-display-container");
@@ -48,6 +49,9 @@ function generateDisplay(project) {
 
   // Update todo list for selected project
   displayContainer.appendChild(updateListContainer(projectListItems));
+
+  // Add new task button to end of each list
+  displayContainer.appendChild(generateAddTaskBtn());
 }
 
 // Change name to updateDisplay

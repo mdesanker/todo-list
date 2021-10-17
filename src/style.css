@@ -77,7 +77,7 @@ main {
   background-color: transparent;
 }
 .tab-btn:hover {
-  background-color: var(--primary-light);
+  background-color: lightgrey;
 }
 .project-header {
   text-align: center;
@@ -163,8 +163,51 @@ main {
   color: gray;
   padding: 5px 0 5px 25px;
 }
+/* Add Task CSS */
 .add-task-btn {
   font-size: 18px;
+}
+.add-task-btn:hover {
+  background-color: lightgray;
+}
+.task-form {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.task-form input,
+.task-form select,
+.task-form textarea {
+  font-size: 18px;
+}
+.task-form label {
+  margin-right: 10px;
+}
+.task-title-container,
+.task-form-2 {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.task-form-2 {
+  gap: 50px;
+}
+#task-title {
+  width: 70%;
+}
+.task-form-btns {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+.task-btn {
+  font-size: 18px;
+  padding: 5px 10px;
 }
 /* Footer CSS */
 footer {

@@ -62,14 +62,11 @@ projectForm.addEventListener("submit", function (e) {
   projectList.push(newProj);
   clearProjectForm();
   closeProjectForm();
-  // console.log(projectList);
   generateProjectList();
-  console.log(projectList);
 });
 
 projectFormCancelBtn.addEventListener("click", function () {
   clearProjectForm();
-  closeProjectForm();
 });
 
 function generateProjectList() {
@@ -101,13 +98,10 @@ function generateProjectList() {
     projectListContainer.appendChild(projectItem);
   });
 
-  // Add event listener to project list
+  // Add event listener to project list to update display
   projectListContainer.addEventListener("click", function (e) {
     const clicked = e.target.closest("button").dataset.id;
-    // console.log(clicked);
-
-    // console.log(projectList[clicked]);
-    // generateDisplay(projectList[clicked]);
+    generateDisplay(projectList[clicked]);
   });
 
   return projectListContainer;

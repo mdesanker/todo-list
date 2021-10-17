@@ -8,11 +8,15 @@ const displayContainer = document.querySelector(".list-display-container");
 
 // This module will need to import to key for the project
 
-const project = projectList["Project 1"];
-console.log(project);
+// const project = projectList["Project 1"];
+// const project = { "Project 1": [item1, item2, item1, item2, item1, item2] };
+console.log("test");
+// console.log(projectList);
+
+// console.log("index", projectList);
 
 const title = "Project 1";
-project[1].complete = true;
+// project[1].complete = true;
 
 function generateDisplay(project) {
   // Clear display container
@@ -109,24 +113,6 @@ function addListEventListener(project) {
       console.log(project[clickedIndex]);
     }
   });
-}
-
-{
-  /* <li class="list-item">
-              <div class="list-item-main">
-                <div class="item-left">
-                  <i class="far fa-check-square"></i>
-                  <p class="task-title">Wash the dishes</p>
-                </div>
-                <div class="item-right">
-                  <p class="task-date">10/14/21</p>
-                  <i class="far fa-trash-alt"></i>
-                </div>
-              </div>
-              <p class="list-item-notes visible">
-                These are notes for the list item.
-              </p>
-            </li> */
 }
 
 export default generateDisplay;

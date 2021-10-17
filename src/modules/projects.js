@@ -1,6 +1,7 @@
 "use strict";
 
 import { makeElement } from "./element";
+import generateDisplay from "./display";
 
 // Elements
 const addProjectBtn = document.querySelector(".add-project-btn");
@@ -38,14 +39,15 @@ class Todo {
 
 const item1 = new Todo("Wash dishes", "10/16/2021", "Sink is very dirty");
 const item2 = new Todo("Get gas", "10/15/2021", "Low tank");
+const item3 = new Todo("Buy baby food");
 
 addProjectBtn.addEventListener("click", openProjectForm);
 
 // Store projects in object
-const projectList = {
-  "Project 1": [item1, item2, item1, item2, item1, item2],
-  "Project 2": [],
-};
+const projectList = [
+  { "Project 1": [item1, item2, item1, item2, item1, item2] },
+  { "Project 2": [item3] },
+];
 
 // Add project name to object on form submission
 projectForm.addEventListener("submit", function (e) {
@@ -77,12 +79,13 @@ function generateProjectList() {
     projectListContainer.removeChild(item);
   });
 
-  // Generate sidebar project item for each project in list
-  Object.keys(projectList).forEach((project, index) => {
+  // Generate project item for each project in list
+  projectList.forEach((project, index) => {
+    console.log(project, index);
     const projectItem = makeElement(
       "button",
       ["tab-btn", "project-item"],
-      project
+      Object.keys(project)
     );
     projectItem.dataset.id = index;
     projectItem.insertAdjacentHTML(
@@ -93,15 +96,38 @@ function generateProjectList() {
       "beforeend",
       "<i class='fas fa-times-circle hidden'></i>"
     );
-    console.log(projectItem);
 
     projectListContainer.appendChild(projectItem);
   });
 
+  // Generate sidebar project item for each project in list
+  // Object.keys(projectList).forEach((project, index) => {
+  //   const projectItem = makeElement(
+  //     "button",
+  //     ["tab-btn", "project-item"],
+  //     project
+  //   );
+  //   projectItem.dataset.id = index;
+  //   projectItem.insertAdjacentHTML(
+  //     "afterbegin",
+  //     "<i class='fas fa-tasks'></i>"
+  //   );
+  //   projectItem.insertAdjacentHTML(
+  //     "beforeend",
+  //     "<i class='fas fa-times-circle hidden'></i>"
+  //   );
+  //   console.log(projectItem);
+
+  //   projectListContainer.appendChild(projectItem);
+  // });
+
   // Add event listener to project list
   projectListContainer.addEventListener("click", function (e) {
-    const clicked = e.target.closest("button");
+    const clicked = e.target.closest("button").dataset.id;
     console.log(clicked);
+
+    console.log(projectList[clicked]);
+    // generateDisplay(projectList[clicked]);
   });
 
   return projectListContainer;

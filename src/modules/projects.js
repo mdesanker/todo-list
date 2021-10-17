@@ -58,11 +58,13 @@ projectForm.addEventListener("submit", function (e) {
     return;
   }
   // Add project name to object
-  projectList[projectInput.value] = [];
+  const newProj = { [projectInput.value]: [] };
+  projectList.push(newProj);
   clearProjectForm();
   closeProjectForm();
-  console.log(projectList);
+  // console.log(projectList);
   generateProjectList();
+  console.log(projectList);
 });
 
 projectFormCancelBtn.addEventListener("click", function () {
@@ -81,7 +83,6 @@ function generateProjectList() {
 
   // Generate project item for each project in list
   projectList.forEach((project, index) => {
-    console.log(project, index);
     const projectItem = makeElement(
       "button",
       ["tab-btn", "project-item"],
@@ -100,33 +101,12 @@ function generateProjectList() {
     projectListContainer.appendChild(projectItem);
   });
 
-  // Generate sidebar project item for each project in list
-  // Object.keys(projectList).forEach((project, index) => {
-  //   const projectItem = makeElement(
-  //     "button",
-  //     ["tab-btn", "project-item"],
-  //     project
-  //   );
-  //   projectItem.dataset.id = index;
-  //   projectItem.insertAdjacentHTML(
-  //     "afterbegin",
-  //     "<i class='fas fa-tasks'></i>"
-  //   );
-  //   projectItem.insertAdjacentHTML(
-  //     "beforeend",
-  //     "<i class='fas fa-times-circle hidden'></i>"
-  //   );
-  //   console.log(projectItem);
-
-  //   projectListContainer.appendChild(projectItem);
-  // });
-
   // Add event listener to project list
   projectListContainer.addEventListener("click", function (e) {
     const clicked = e.target.closest("button").dataset.id;
-    console.log(clicked);
+    // console.log(clicked);
 
-    console.log(projectList[clicked]);
+    // console.log(projectList[clicked]);
     // generateDisplay(projectList[clicked]);
   });
 

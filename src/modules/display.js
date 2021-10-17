@@ -7,31 +7,7 @@ import { generateAddTaskBtn } from "./taskform";
 // Elements
 const displayContainer = document.querySelector(".list-display-container");
 
-// // Todo object class
-// class Todo {
-//   constructor(title, dueDate, description, priority) {
-//     this.title = title;
-//     this.dueDate = dueDate;
-//     this.description = description;
-//     this.priority = priority;
-//     this.complete = false;
-//   }
-// }
-
-// const item1 = new Todo("Wash dishes", "10/16/2021", "Sink is very dirty");
-// const item2 = new Todo("Get gas", "10/15/2021", "Low tank");
-// const item3 = new Todo("Buy baby food");
-
-// // Store projects in object
-// const testList = [
-//   { "Project 1": [item1, item2, item1, item2, item1, item2] },
-//   { "Project 2": [item3] },
-// ];
-
-// const project = testList[0];
-// console.log(project);
-
-// This module will need to import to key for the project
+// Generate todo list display
 function generateDisplay(project) {
   // Clear display container
   [...displayContainer.children].forEach((child) =>

@@ -163,6 +163,9 @@ main {
   color: gray;
   padding: 5px 0 5px 25px;
 }
+.add-task-btn {
+  font-size: 18px;
+}
 /* Footer CSS */
 footer {
   position: absolute;

@@ -20,3 +20,5 @@ class ProjectList {
     this.projectList = this.projectList.filter((item) => item !== project);
   }
 }
+
+export { ProjectList };

@@ -116,7 +116,57 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\n\n// import {\n//   generateProjectList,\n//   projectList,\n//   addDisplayFunctionality,\n// } from \"./modules/projects\";\n// import generateDisplay from \"./modules/display\";\n\n// generateProjectList();\n// generateDisplay(projectList[0]);\n// addDisplayFunctionality();\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _modules_display__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/display */ \"./src/modules/display.js\");\n\n\n\n// import {\n//   generateProjectList,\n//   projectList,\n//   addDisplayFunctionality,\n// } from \"./modules/projects\";\n// import generateDisplay from \"./modules/display\";\n\n// generateProjectList();\n// generateDisplay(projectList[0]);\n// addDisplayFunctionality();\n\n\n\n(0,_modules_display__WEBPACK_IMPORTED_MODULE_1__.initilizeWebsite)();\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/display.js":
+/*!********************************!*\
+  !*** ./src/modules/display.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"initilizeWebsite\": () => (/* binding */ initilizeWebsite)\n/* harmony export */ });\n/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./task */ \"./src/modules/task.js\");\n/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./project */ \"./src/modules/project.js\");\n/* harmony import */ var _projectList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./projectList */ \"./src/modules/projectList.js\");\n/* harmony import */ var _element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./element */ \"./src/modules/element.js\");\n\n\n\n\n\n\n\nconst toDoList = new _projectList__WEBPACK_IMPORTED_MODULE_2__.ProjectList();\n// console.log(toDoList.getProjects());\n\nconst project1 = new _project__WEBPACK_IMPORTED_MODULE_1__.Project(\"Project 1\");\nconst project2 = new _project__WEBPACK_IMPORTED_MODULE_1__.Project(\"Groceries\");\nconst dishes = new _task__WEBPACK_IMPORTED_MODULE_0__.Task(\"Wash dishes\");\nproject1.addTask(dishes);\n\n// console.log(project1);\n\ntoDoList.addProject(project1);\ntoDoList.addProject(project2);\n// console.log(toDoList);\n\nfunction initilizeWebsite() {\n  const projectContainer = document.querySelector(\".project-container\");\n\n  projectContainer.prepend(updateProjectList());\n}\n\nfunction updateProjectList() {\n  // Clear existing project list\n  document.querySelector(\".project-list\").remove();\n\n  // Create new project list\n  const projectList = (0,_element__WEBPACK_IMPORTED_MODULE_3__.makeElement)(\"div\", [\"project-list\"]);\n\n  // Generate buttons for user project list\n  const currentProjects = toDoList.getProjects();\n  currentProjects.forEach((project) => {\n    if (project.getName() !== \"Today\" && project.getName() !== \"Week\") {\n      const projectBtn = (0,_element__WEBPACK_IMPORTED_MODULE_3__.makeElement)(\n        \"button\",\n        [\"tab-btn\", \"project-item\"],\n        project.getName()\n      );\n      projectBtn.insertAdjacentHTML(\n        \"afterbegin\",\n        '<i class=\"fas fa-tasks\"></i>'\n      );\n      projectBtn.insertAdjacentHTML(\n        \"beforeend\",\n        '<i class=\"fas fa-times-circle hidden\"></i>'\n      );\n      projectList.appendChild(projectBtn);\n    }\n  });\n  return projectList;\n}\n\nfunction updateDisplay() {\n  //\n}\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/modules/display.js?");
+
+/***/ }),
+
+/***/ "./src/modules/element.js":
+/*!********************************!*\
+  !*** ./src/modules/element.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"makeElement\": () => (/* binding */ makeElement)\n/* harmony export */ });\n\n\nfunction makeElement(element, classes = [], text = \"\") {\n  const el = document.createElement(element);\n  if (classes.length) {\n    classes.forEach((item) => el.classList.add(item));\n  }\n  if (text) {\n    el.textContent = text;\n  }\n  return el;\n}\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/modules/element.js?");
+
+/***/ }),
+
+/***/ "./src/modules/project.js":
+/*!********************************!*\
+  !*** ./src/modules/project.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Project\": () => (/* binding */ Project)\n/* harmony export */ });\nclass Project {\n  constructor(name) {\n    this.name = name;\n    this.taskList = [];\n  }\n\n  setName(name) {\n    this.name = name;\n  }\n\n  getName() {\n    return this.name;\n  }\n\n  setTasks(tasks) {\n    this.taskList = tasks;\n  }\n\n  getTasks() {\n    return this.taskList;\n  }\n\n  addTask(task) {\n    if (this.taskList.includes(task)) return;\n    this.taskList.push(task);\n  }\n\n  removeTask(task) {\n    this.taskList = this.taskList.filter((item) => item !== task);\n  }\n}\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/modules/project.js?");
+
+/***/ }),
+
+/***/ "./src/modules/projectList.js":
+/*!************************************!*\
+  !*** ./src/modules/projectList.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"ProjectList\": () => (/* binding */ ProjectList)\n/* harmony export */ });\n/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./project */ \"./src/modules/project.js\");\n\n\nclass ProjectList {\n  constructor() {\n    this.projectList = [];\n    this.projectList.push(new _project__WEBPACK_IMPORTED_MODULE_0__.Project(\"Today\"));\n    this.projectList.push(new _project__WEBPACK_IMPORTED_MODULE_0__.Project(\"Week\"));\n  }\n\n  getProjects() {\n    return this.projectList;\n  }\n\n  addProject(project) {\n    if (this.projectList.includes(project)) return;\n    this.projectList.push(project);\n  }\n\n  removeProject(project) {\n    this.projectList = this.projectList.filter((item) => item !== project);\n  }\n}\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/modules/projectList.js?");
+
+/***/ }),
+
+/***/ "./src/modules/task.js":
+/*!*****************************!*\
+  !*** ./src/modules/task.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Task\": () => (/* binding */ Task)\n/* harmony export */ });\nclass Task {\n  constructor(name, date = \"No date\") {\n    this.name = name;\n    this.date = date;\n  }\n\n  setName(name) {\n    this.name = name;\n  }\n\n  getName() {\n    return this.name;\n  }\n\n  setDate(date) {\n    this.date = date;\n  }\n\n  getDate() {\n    return this.date;\n  }\n}\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/modules/task.js?");
 
 /***/ })
 

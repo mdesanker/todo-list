@@ -1,6 +1,6 @@
 "use strict";
 
-export function makeElement(element, classes = [], text = "") {
+function makeElement(element, classes = [], text = "") {
   const el = document.createElement(element);
   if (classes.length) {
     classes.forEach((item) => el.classList.add(item));
@@ -10,3 +10,5 @@ export function makeElement(element, classes = [], text = "") {
   }
   return el;
 }
+
+export { makeElement };

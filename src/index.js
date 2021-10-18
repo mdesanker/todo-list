@@ -11,3 +11,7 @@ import "./style.css";
 // generateProjectList();
 // generateDisplay(projectList[0]);
 // addDisplayFunctionality();
+
+import { initilizeWebsite } from "./modules/display";
+
+initilizeWebsite();

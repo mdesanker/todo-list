@@ -1,76 +1,62 @@
 "use strict";
 
-import { projectList } from "./projects";
+import { Task } from "./task";
+import { Project } from "./project";
+import { ProjectList } from "./projectList";
 import { makeElement } from "./element";
 
-// Elements
-const displayContainer = document.querySelector(".list-display-container");
+const toDoList = new ProjectList();
+// console.log(toDoList.getProjects());
 
-// Generate todo list display
-function generateDisplay(project) {
-  // Clear display container
-  [...displayContainer.children].forEach((child) =>
-    displayContainer.removeChild(child)
-  );
+const project1 = new Project("Project 1");
+const project2 = new Project("Groceries");
+const dishes = new Task("Wash dishes");
+project1.addTask(dishes);
 
-  // Extract title and list from project object
-  const [projectTitle] = Object.keys(project);
-  const [projectListItems] = Object.values(project);
-  // console.log(projectListItems);
+// console.log(project1);
 
-  // Update header for selected project
-  const header = makeElement("h2", ["list-header"], projectTitle);
-  displayContainer.appendChild(header);
+toDoList.addProject(project1);
+toDoList.addProject(project2);
+// console.log(toDoList);
 
-  // Update todo list for selected project
-  displayContainer.appendChild(updateListContainer(projectListItems));
+function initilizeWebsite() {
+  const projectContainer = document.querySelector(".project-container");
+
+  projectContainer.prepend(updateProjectList());
 }
 
-// Change name to updateDisplay
-function updateListContainer(projectItems) {
-  const listContainer = makeElement("ul", ["list-container"]);
+function updateProjectList() {
+  // Clear existing project list
+  document.querySelector(".project-list").remove();
 
-  // console.log(projectItems);
-  projectItems.forEach((item, index) => {
-    const listItem = makeElement("li", ["list-item"]);
-    listItem.dataset.id = index;
+  // Create new project list
+  const projectList = makeElement("div", ["project-list"]);
 
-    const listItemMain = makeElement("div", ["list-item-main"]);
-
-    // Add icon with insertAdjacentHTML so HTML is parsed
-    const itemLeft = makeElement("div", ["item-left"]);
-    if (item.complete === true)
-      itemLeft.insertAdjacentHTML(
-        "afterbegin",
-        '<i class="far fa-check-square"></i>'
+  // Generate buttons for user project list
+  const currentProjects = toDoList.getProjects();
+  currentProjects.forEach((project) => {
+    if (project.getName() !== "Today" && project.getName() !== "Week") {
+      const projectBtn = makeElement(
+        "button",
+        ["tab-btn", "project-item"],
+        project.getName()
       );
-    else
-      itemLeft.insertAdjacentHTML(
+      projectBtn.insertAdjacentHTML(
         "afterbegin",
-        '<i class="far fa-square"></i>'
+        '<i class="fas fa-tasks"></i>'
       );
-
-    const taskTitle = makeElement("p", ["task-title"], item.title);
-    itemLeft.appendChild(taskTitle);
-    listItemMain.appendChild(itemLeft);
-    const itemRight = makeElement("div", ["item-right"]);
-    const date = makeElement("p", ["task-date"], item.dueDate);
-    itemRight.appendChild(date);
-    itemRight.insertAdjacentHTML(
-      "beforeend",
-      '<i class="far fa-trash-alt"></i>'
-    );
-    listItemMain.appendChild(itemRight);
-    listItem.appendChild(listItemMain);
-    const notes = makeElement(
-      "p",
-      ["list-item-notes", "not-visible"],
-      item.description
-    );
-    listItem.appendChild(notes);
-    listContainer.appendChild(listItem);
+      projectBtn.insertAdjacentHTML(
+        "beforeend",
+        '<i class="fas fa-times-circle hidden"></i>'
+      );
+      projectList.appendChild(projectBtn);
+    }
   });
-  return listContainer;
+  return projectList;
 }
 
-export default generateDisplay;
+function updateDisplay() {
+  //
+}
+
+export { initilizeWebsite };

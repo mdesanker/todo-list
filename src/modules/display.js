@@ -5,6 +5,15 @@ import { Project } from "./project";
 import { ProjectList } from "./projectList";
 import { makeElement } from "./element";
 
+// ELEMENTS
+const projectContainer = document.querySelector(".project-container");
+const addProjectBtn = document.querySelector(".add-project-btn");
+const projectFormContainer = document.querySelector(".project-form-container");
+const projectForm = document.querySelector(".add-project");
+const projectInputField = document.querySelector("#project-input");
+const projectSubmitBtn = document.querySelector(".add-btn");
+const projectCancelBtn = document.querySelector(".cancel-btn");
+
 const toDoList = new ProjectList();
 // console.log(toDoList.getProjects());
 
@@ -19,10 +28,23 @@ toDoList.addProject(project1);
 toDoList.addProject(project2);
 // console.log(toDoList);
 
-function initilizeWebsite() {
-  const projectContainer = document.querySelector(".project-container");
+// FUNCTIONS
+function openProjectForm() {
+  addProjectBtn.classList.add("not-visible");
+  projectFormContainer.classList.remove("not-visible");
+}
 
-  projectContainer.prepend(updateProjectList());
+function closeProjectForm() {
+  projectInputField.value = "";
+  addProjectBtn.classList.remove("not-visible");
+  projectFormContainer.classList.add("not-visible");
+}
+
+function initilizeWebsite() {
+  // Create To Do List
+
+  // projectContainer.prepend(updateProjectList());
+  updateProjectList();
 }
 
 function updateProjectList() {
@@ -52,11 +74,26 @@ function updateProjectList() {
       projectList.appendChild(projectBtn);
     }
   });
-  return projectList;
+  projectContainer.prepend(projectList);
+  // return projectList;
+  return;
 }
 
 function updateDisplay() {
   //
 }
+
+// EVENT LISTENERS
+addProjectBtn.addEventListener("click", openProjectForm);
+projectCancelBtn.addEventListener("click", closeProjectForm);
+projectForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const newProject = projectInputField.value;
+  if (toDoList.checkProjectName(newProject))
+    toDoList.addProject(new Project(newProject));
+  else alert(`${newProject} already in use.`);
+  closeProjectForm();
+  updateProjectList();
+});
 
 export { initilizeWebsite };

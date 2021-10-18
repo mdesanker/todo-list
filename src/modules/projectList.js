@@ -11,6 +11,11 @@ class ProjectList {
     return this.projectList;
   }
 
+  checkProjectName(name) {
+    if (!this.projectList.map((project) => project.name).includes(name))
+      return true;
+  }
+
   addProject(project) {
     if (this.projectList.includes(project)) return;
     this.projectList.push(project);

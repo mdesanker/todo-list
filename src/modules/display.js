@@ -24,6 +24,9 @@ function generateDisplay(project) {
 
   // Update todo list for selected project
   displayContainer.appendChild(updateListContainer(projectListItems));
+
+  // Add event listener to project list
+  addListEventListener(project);
 }
 
 // Change name to updateDisplay

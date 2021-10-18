@@ -170,6 +170,7 @@ main {
 }
 .task-form-container {
   margin-top: 10px;
+  margin-bottom: 50px;
 }
 .add-task-btn {
   font-size: 18px;

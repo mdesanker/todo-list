@@ -125,6 +125,7 @@ function generateProjectList() {
 }
 
 // Add task functionality
+// ELements
 const taskForm = document.querySelector(".task-form-container");
 const addTaskBtn = document.querySelector(".add-task-btn");
 const cancelNewTaskBtn = document.querySelector(".task-cancel");
@@ -135,6 +136,7 @@ const taskFormDate = document.querySelector("#task-date");
 const taskFormPriority = document.querySelector("#task-priority");
 const taskFormNotes = document.querySelector("#task-notes");
 
+// Functions
 const openTaskForm = () => {
   taskForm.classList.remove("not-visible");
   addTaskBtn.classList.add("not-visible");
@@ -153,12 +155,14 @@ const clearTaskForm = () => {
   taskFormNotes.value = "";
 };
 
+// Open and close new task form using add task button
 addTaskBtn.addEventListener("click", openTaskForm);
 cancelNewTaskBtn.addEventListener("click", function () {
   closeTaskForm();
   clearTaskForm();
 });
 
+// Add new task form
 addTaskForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -185,5 +189,7 @@ addTaskForm.addEventListener("submit", function (e) {
   // Update display with current project
   generateDisplay(projectList[currentProjectIndex]);
 });
+
+// Delete task functionality
 
 export { generateProjectList, projectList };

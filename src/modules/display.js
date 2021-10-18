@@ -24,9 +24,6 @@ function generateDisplay(project) {
 
   // Update todo list for selected project
   displayContainer.appendChild(updateListContainer(projectListItems));
-
-  // Add event listener to project list
-  addListEventListener(project);
 }
 
 // Change name to updateDisplay
@@ -74,24 +71,6 @@ function updateListContainer(projectItems) {
     listContainer.appendChild(listItem);
   });
   return listContainer;
-}
-
-function addListEventListener(project) {
-  displayContainer.addEventListener("click", function (e) {
-    console.log(e.target);
-    // const clicked = e.target.closest(".list-item");
-    // if (!clicked) return;
-    // console.log(clicked);
-
-    if (e.target.classList.contains("far")) {
-      e.target.classList.toggle("fa-square");
-      e.target.classList.toggle("fa-check-square");
-      // Use data attribute to identify clicked item
-      const clickedIndex = e.target.closest(".list-item").dataset.id;
-      project[clickedIndex].complete = true;
-      console.log(project[clickedIndex]);
-    }
-  });
 }
 
 export default generateDisplay;

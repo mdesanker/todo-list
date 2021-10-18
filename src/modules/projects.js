@@ -47,8 +47,8 @@ addProjectBtn.addEventListener("click", openProjectForm);
 
 // Store projects in object
 const projectList = [
-  { "Project 1": [item1, item2, item1, item2, item1, item2] },
-  { "Project 2": [item3] },
+  { "Project 1": [item1, item2, item1, item3] },
+  { "Project 2": [item3, item2] },
 ];
 
 let currentProjectIndex = 0;
@@ -188,8 +188,34 @@ addTaskForm.addEventListener("submit", function (e) {
 
   // Update display with current project
   generateDisplay(projectList[currentProjectIndex]);
+  addDisplayFunctionality();
 });
 
 // Delete task functionality
+function addDisplayFunctionality() {
+  // Function needed so can be called every time new display is generated
+  const displayArea = document.querySelector(".list-display-container");
 
-export { generateProjectList, projectList };
+  displayArea.addEventListener("click", function (e) {
+    console.log(e.target);
+
+    // Delete  icon functionality
+    if (e.target.classList.contains("fa-trash-alt")) {
+      console.log("trash can clicked");
+      const itemSelected = e.target.closest(".list-item").dataset.id;
+      console.log(itemSelected);
+      console.log(
+        currentProjectIndex,
+        Object.keys(projectList[currentProjectIndex])
+      );
+      // console.log(
+      //   ...Object.values(
+      //     projectList[currentProjectIndex].splice(itemSelected, 1)
+      //   )
+      // );
+      generateDisplay(projectList[currentProjectIndex]);
+    }
+  });
+}
+
+export { generateProjectList, projectList, addDisplayFunctionality };

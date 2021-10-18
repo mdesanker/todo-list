@@ -51,6 +51,8 @@ const projectList = [
   { "Project 2": [item3] },
 ];
 
+let currentProjectIndex = 0;
+
 // Add project name to object on form submission
 projectForm.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -115,10 +117,73 @@ function generateProjectList() {
   // Add event listener to project list to update display
   projectListContainer.addEventListener("click", function (e) {
     const clicked = e.target.closest("button").dataset.id;
+    currentProjectIndex = clicked;
     generateDisplay(projectList[clicked]);
   });
 
   return projectListContainer;
 }
+
+// Add task functionality
+const taskForm = document.querySelector(".task-form-container");
+const addTaskBtn = document.querySelector(".add-task-btn");
+const cancelNewTaskBtn = document.querySelector(".task-cancel");
+const addTaskForm = document.querySelector(".task-form");
+
+const taskFormTitle = document.querySelector("#task-title");
+const taskFormDate = document.querySelector("#task-date");
+const taskFormPriority = document.querySelector("#task-priority");
+const taskFormNotes = document.querySelector("#task-notes");
+
+const openTaskForm = () => {
+  taskForm.classList.remove("not-visible");
+  addTaskBtn.classList.add("not-visible");
+};
+
+const closeTaskForm = () => {
+  taskForm.classList.add("not-visible");
+  addTaskBtn.classList.remove("not-visible");
+};
+
+const clearTaskForm = () => {
+  // Clear form code
+  taskFormTitle.value = "";
+  taskFormDate.value = "";
+  taskFormPriority.value = "";
+  taskFormNotes.value = "";
+};
+
+addTaskBtn.addEventListener("click", openTaskForm);
+cancelNewTaskBtn.addEventListener("click", function () {
+  closeTaskForm();
+  clearTaskForm();
+});
+
+addTaskForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const newToDo = new Todo(
+    taskFormTitle.value,
+    taskFormDate.value,
+    taskFormNotes.value,
+    taskFormPriority.value
+  );
+  clearTaskForm();
+  closeTaskForm();
+
+  // Extract current todo list
+  const [currentToDo] = [...Object.values(projectList[currentProjectIndex])];
+
+  // Append new item to current todo list
+  const newToDoList = [...currentToDo, newToDo];
+
+  // Extract name of project to create new object
+  const projectName = Object.keys(projectList[currentProjectIndex])[0];
+
+  projectList.splice(currentProjectIndex, 1, { [projectName]: newToDoList });
+
+  // Update display with current project
+  generateDisplay(projectList[currentProjectIndex]);
+});
 
 export { generateProjectList, projectList };

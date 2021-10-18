@@ -2,7 +2,6 @@
 
 import { projectList } from "./projects";
 import { makeElement } from "./element";
-import { generateAddTaskBtn } from "./taskform";
 
 // Elements
 const displayContainer = document.querySelector(".list-display-container");
@@ -25,9 +24,6 @@ function generateDisplay(project) {
 
   // Update todo list for selected project
   displayContainer.appendChild(updateListContainer(projectListItems));
-
-  // Add new task button to end of each list
-  displayContainer.appendChild(generateAddTaskBtn());
 }
 
 // Change name to updateDisplay
@@ -94,25 +90,5 @@ function addListEventListener(project) {
     }
   });
 }
-
-{
-  /* <li class="list-item">
-              <div class="list-item-main">
-                <div class="item-left">
-                  <i class="far fa-square"></i>
-                  <p class="task-title">Wash the dishes</p>
-                </div>
-                <div class="item-right">
-                  <p class="task-date">10/14/21</p>
-                  <i class="far fa-trash-alt"></i>
-                </div>
-              </div>
-              <p class="list-item-notes not-visible">
-                These are notes for the list item.
-              </p>
-            </li> */
-}
-
-// generateDisplay(project);
 
 export default generateDisplay;

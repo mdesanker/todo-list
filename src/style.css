@@ -168,6 +168,9 @@ main {
   max-width: 1000px;
   margin: 0 auto;
 }
+.task-form-container {
+  margin-top: 10px;
+}
 .add-task-btn {
   font-size: 18px;
 }

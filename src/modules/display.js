@@ -16,7 +16,15 @@ const projectCancelBtn = document.querySelector(".cancel-btn");
 
 const displayContainer = document.querySelector(".display-container");
 const displayTitle = document.querySelector(".list-header");
-// const listContainer = document.querySelector(".list-container");
+
+const addTaskBtn = document.querySelector(".add-task-btn");
+const taskFormContainer = document.querySelector(".task-form-container");
+const taskForm = document.querySelector(".task-form");
+const taskTitleInput = document.querySelector("#task-title");
+const taskDateInput = document.querySelector("#task-date");
+const taskPriorityInput = document.querySelector("#task-priority");
+const taskSubmitBtn = document.querySelector(".task-submit");
+const taskCancelBtn = document.querySelector(".task-cancel");
 
 let currentProject;
 
@@ -43,6 +51,23 @@ function closeProjectForm() {
   projectInputField.value = "";
   addProjectBtn.classList.remove("not-visible");
   projectFormContainer.classList.add("not-visible");
+}
+
+function clearTaskForm() {
+  taskTitleInput.value = "";
+  taskDateInput.value = "";
+  // taskPriorityInput.value = "";
+}
+
+function openTaskForm() {
+  addTaskBtn.classList.add("not-visible");
+  taskFormContainer.classList.remove("not-visible");
+}
+
+function closeTaskForm() {
+  addTaskBtn.classList.remove("not-visible");
+  taskFormContainer.classList.add("not-visible");
+  clearTaskForm();
 }
 
 function initializeWebsite() {
@@ -132,20 +157,8 @@ function updateProjectDisplay(project) {
   displayContainer.appendChild(listContainer);
 }
 
-{
-  /* <li class="list-item">
-              <div class="list-item-left">
-                <i class="far fa-check-square"></i>
-                <p class="task-title">Wash the dishes</p>
-              </div>
-              <div class="list-item-right">
-                <p class="task-date">10/14/21</p>
-                <i class="far fa-trash-alt"></i>
-              </div>
-            </li> */
-}
-
 // EVENT LISTENERS
+// Add project
 addProjectBtn.addEventListener("click", openProjectForm);
 projectCancelBtn.addEventListener("click", closeProjectForm);
 projectForm.addEventListener("submit", function (e) {
@@ -156,6 +169,17 @@ projectForm.addEventListener("submit", function (e) {
   else alert(`${newProject} already in use.`);
   closeProjectForm();
   updateProjectList();
+});
+
+// Add task
+addTaskBtn.addEventListener("click", openTaskForm);
+taskCancelBtn.addEventListener("click", closeTaskForm);
+
+taskForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const newTask = new Task(taskTitleInput.value, taskDateInput.value);
+  console.log(newTask);
+  closeTaskForm();
 });
 
 export { initializeWebsite };

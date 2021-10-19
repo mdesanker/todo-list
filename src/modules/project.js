@@ -20,6 +20,10 @@ class Project {
     return this.taskList;
   }
 
+  getTaskAtIndex(index) {
+    return this.taskList[index];
+  }
+
   addTask(task) {
     if (this.taskList.includes(task)) return;
     this.taskList.push(task);

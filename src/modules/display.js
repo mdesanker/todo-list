@@ -142,7 +142,7 @@ function updateProjectDisplay(project) {
     listItemLeft.appendChild(makeElement("p", ["task-title"], task.getName()));
     listItemLeft.insertAdjacentHTML(
       "afterbegin",
-      '<i class="far fa-check-square"></i>'
+      '<i class="far fa-square"></i>'
     );
 
     // List item right side
@@ -163,16 +163,29 @@ function updateProjectDisplay(project) {
 
   // Add event listener to list items
   listContainer.addEventListener("click", function (e) {
-    console.log(e.target);
     const targetItem = e.target.closest("li").dataset.id;
-    console.log(targetItem);
+    // Delete item
     if (e.target.classList.contains("fa-trash-alt")) {
-      console.log("trash clicked");
-      console.log(
-        toDoList
-          .getProjectAtIndex(activeProjectIndex)
-          .removeTaskAtIndex(targetItem)
-      );
+      console.log(targetItem);
+      toDoList
+        .getProjectAtIndex(activeProjectIndex)
+        .removeTaskAtIndex(targetItem);
+      updateProjectDisplay(toDoList.getProjectAtIndex(activeProjectIndex));
+    }
+    // Mark complete
+    else if (
+      e.target.classList.contains("fa-square") ||
+      e.target.classList.contains("fa-check-square")
+    ) {
+      toDoList
+        .getProjectAtIndex(activeProjectIndex)
+        .getTaskAtIndex(targetItem)
+        .changeCompleteStatus();
+      // console.log(
+      //   toDoList
+      //     .getProjectAtIndex(activeProjectIndex)
+      //     .getTaskAtIndex(targetItem)
+      // );
       updateProjectDisplay(toDoList.getProjectAtIndex(activeProjectIndex));
     }
   });

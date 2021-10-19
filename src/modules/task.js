@@ -2,6 +2,7 @@ class Task {
   constructor(name, date = "No date") {
     this.name = name;
     this.date = date;
+    this.isComplete = false;
   }
 
   setName(name) {
@@ -18,6 +19,13 @@ class Task {
 
   getDate() {
     return this.date;
+  }
+
+  changeCompleteStatus() {
+    this.isComplete === false
+      ? (this.isComplete = true)
+      : (this.isComplete = false);
+    return this.isComplete;
   }
 }
 

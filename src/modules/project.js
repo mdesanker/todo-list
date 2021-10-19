@@ -28,6 +28,10 @@ class Project {
   removeTask(task) {
     this.taskList = this.taskList.filter((item) => item !== task);
   }
+
+  removeTaskAtIndex(index) {
+    this.taskList.splice(index, 1);
+  }
 }
 
 export { Project };

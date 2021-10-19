@@ -30,6 +30,7 @@ const taskPriorityInput = document.querySelector("#task-priority");
 const taskSubmitBtn = document.querySelector(".task-submit");
 const taskCancelBtn = document.querySelector(".task-cancel");
 
+// Default to "Today" project
 let activeProjectIndex = 0;
 
 ///////////////////////////////////////////////
@@ -110,15 +111,9 @@ function updateProjectList(project) {
   // Add event listener to project list;
   projectContainer.addEventListener("click", function (e) {
     const clicked = e.target.closest("button");
-    console.log(clicked);
     if (!clicked) return;
     const clickedIndex = e.target.closest("button").dataset.id;
-
     activeProjectIndex = clickedIndex;
-
-    displayTitle.textContent = toDoList
-      .getProjectAtIndex(clickedIndex)
-      .getName();
     updateProjectDisplay(toDoList.getProjectAtIndex(clickedIndex));
   });
 
@@ -138,8 +133,9 @@ function updateProjectDisplay(project) {
   const listContainer = makeElement("ul", ["list-container"]);
   // Create list items and append to list container
   const taskList = project.getTasks();
-  taskList.forEach((task) => {
+  taskList.forEach((task, index) => {
     const listItem = makeElement("li", ["list-item"]);
+    listItem.dataset.id = index;
 
     // List item left side
     const listItemLeft = makeElement("div", ["list-item-left"]);
@@ -164,6 +160,22 @@ function updateProjectDisplay(project) {
   });
 
   displayContainer.appendChild(listContainer);
+
+  // Add event listener to list items
+  listContainer.addEventListener("click", function (e) {
+    console.log(e.target);
+    const targetItem = e.target.closest("li").dataset.id;
+    console.log(targetItem);
+    if (e.target.classList.contains("fa-trash-alt")) {
+      console.log("trash clicked");
+      console.log(
+        toDoList
+          .getProjectAtIndex(activeProjectIndex)
+          .removeTaskAtIndex(targetItem)
+      );
+      updateProjectDisplay(toDoList.getProjectAtIndex(activeProjectIndex));
+    }
+  });
 }
 
 // EVENT LISTENERS
@@ -187,6 +199,8 @@ taskCancelBtn.addEventListener("click", closeTaskForm);
 taskForm.addEventListener("submit", function (e) {
   e.preventDefault();
   const newTask = new Task(taskTitleInput.value, taskDateInput.value);
+
+  // TODO: Doesn't prevent duplicate tasks
   toDoList.getProjectAtIndex(activeProjectIndex).addTask(newTask);
   closeTaskForm();
   updateProjectDisplay(toDoList.getProjectAtIndex(activeProjectIndex));

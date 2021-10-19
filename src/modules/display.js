@@ -26,7 +26,7 @@ const taskPriorityInput = document.querySelector("#task-priority");
 const taskSubmitBtn = document.querySelector(".task-submit");
 const taskCancelBtn = document.querySelector(".task-cancel");
 
-let currentProject;
+let activeProjectIndex = 0;
 
 ///////////////////////////////////////////////
 // Test projects
@@ -108,9 +108,8 @@ function updateProjectList() {
     // if (!clicked) return;
     if (!clicked.classList.contains("project-item")) return;
     const clickedIndex = e.target.closest("button").dataset.id;
-    currentProject = clicked.textContent;
-    // console.log("current project: ", currentProject);
-    // console.log("project id", clicked);
+
+    activeProjectIndex = clickedIndex;
 
     displayTitle.textContent = toDoList
       .getProjectAtIndex(clickedIndex)
@@ -171,15 +170,16 @@ projectForm.addEventListener("submit", function (e) {
   updateProjectList();
 });
 
-// Add task
+// Add task form
 addTaskBtn.addEventListener("click", openTaskForm);
 taskCancelBtn.addEventListener("click", closeTaskForm);
 
 taskForm.addEventListener("submit", function (e) {
   e.preventDefault();
   const newTask = new Task(taskTitleInput.value, taskDateInput.value);
-  console.log(newTask);
+  toDoList.getProjectAtIndex(activeProjectIndex).addTask(newTask);
   closeTaskForm();
+  updateProjectDisplay(toDoList.getProjectAtIndex(activeProjectIndex));
 });
 
 export { initializeWebsite };

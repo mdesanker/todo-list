@@ -11,6 +11,10 @@ class ProjectList {
     return this.projectList;
   }
 
+  getProjectAtIndex(index) {
+    return this.projectList[index];
+  }
+
   checkProjectName(name) {
     if (!this.projectList.map((project) => project.name).includes(name))
       return true;

@@ -75,10 +75,11 @@ function closeTaskForm() {
 }
 
 function initializeWebsite() {
-  updateProjectList();
+  updateProjectList(toDoList.getProjectAtIndex(activeProjectIndex));
+  updateProjectDisplay(toDoList.getProjectAtIndex(activeProjectIndex));
 }
 
-function updateProjectList() {
+function updateProjectList(project) {
   // Clear existing project list
   document.querySelector(".project-list").remove();
 
@@ -127,6 +128,11 @@ function updateProjectList() {
 function updateProjectDisplay(project) {
   // Clear display
   document.querySelector(".list-container").remove();
+
+  // Update title
+  displayTitle.textContent = toDoList
+    .getProjectAtIndex(activeProjectIndex)
+    .getName();
 
   // Create new list container
   const listContainer = makeElement("ul", ["list-container"]);

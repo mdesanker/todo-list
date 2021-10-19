@@ -137,7 +137,7 @@ main {
   border-bottom: 1px solid gray;
   margin-bottom: 10px;
 }
-.list-display-container {
+.display-container {
   background-color: white;
   font-size: 18px;
   margin: 0 auto;
@@ -156,20 +156,6 @@ main {
   display: flex;
   gap: 10px;
 }
-/* 
-.list-item-main {
-  display: flex;
-  justify-content: space-between;
-}
-.item-left,
-.item-right {
-  display: flex;
-  gap: 10px;
-}
-.list-item-notes {
-  color: gray;
-  padding: 5px 0 5px 25px;
-} */
 /* Add Task CSS */
 .new-task-container {
   width: 90%;

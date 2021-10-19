@@ -6,7 +6,6 @@ import { ProjectList } from "./projectList";
 import { makeElement } from "./element";
 
 // ELEMENTS
-const listContainer = document.querySelector(".view-container");
 const projectContainer = document.querySelector(".project-container");
 const addProjectBtn = document.querySelector(".add-project-btn");
 const projectFormContainer = document.querySelector(".project-form-container");
@@ -15,8 +14,9 @@ const projectInputField = document.querySelector("#project-input");
 const projectSubmitBtn = document.querySelector(".add-btn");
 const projectCancelBtn = document.querySelector(".cancel-btn");
 
-const displayTitle = document.querySelector(".list-header");
 const displayContainer = document.querySelector(".display-container");
+const displayTitle = document.querySelector(".list-header");
+// const listContainer = document.querySelector(".list-container");
 
 let currentProject;
 
@@ -98,44 +98,50 @@ function updateProjectList() {
 
 function updateProjectDisplay(project) {
   // Clear display
-  const displayContent = displayContainer.children;
-  displayContainer.remove(displayContent);
+  document.querySelector(".list-container").remove();
 
-  // Create new list items
-  const currentTasks = project.getTasks();
-  console.log(currentTasks);
-  currentTasks.forEach((task) => {
-    console.log(task.getName());
+  // Create new list container
+  const listContainer = makeElement("ul", ["list-container"]);
+  // Create list items and append to list container
+  const taskList = project.getTasks();
+  taskList.forEach((task) => {
     const listItem = makeElement("li", ["list-item"]);
-    const listItemMain = makeElement("div", ["list-item-main"]);
-    const itemLeft = makeElement("div", ["item-left"]);
-    const taskTitle = makeElement("p", ["task-title"], task.getName());
-    itemLeft.appendChild(taskTitle);
-    itemLeft.insertAdjacentHTML(
+
+    // List item left side
+    const listItemLeft = makeElement("div", ["list-item-left"]);
+    listItemLeft.appendChild(makeElement("p", ["task-title"], task.getName()));
+    listItemLeft.insertAdjacentHTML(
       "afterbegin",
       '<i class="far fa-check-square"></i>'
     );
-    listItemMain.appendChild(itemLeft);
-    listItem.appendChild(listItemMain);
-    displayContainer.appendChild(listItem);
+
+    // List item right side
+    const listItemRight = makeElement("div", ["list-item-right"]);
+    listItemRight.appendChild(makeElement("p", ["task-date"], task.getDate()));
+    listItemRight.insertAdjacentHTML(
+      "beforeend",
+      '<i class="far fa-trash-alt"></i>'
+    );
+
+    listItem.appendChild(listItemLeft);
+    listItem.appendChild(listItemRight);
+
+    listContainer.appendChild(listItem);
   });
+
+  displayContainer.appendChild(listContainer);
 }
 
 {
   /* <li class="list-item">
-              <div class="list-item-main">
-                <div class="item-left">
-                  <i class="far fa-check-square"></i>
-                  <p class="task-title">Wash the dishes</p>
-                </div>
-                <div class="item-right">
-                  <p class="task-date">10/14/21</p>
-                  <i class="far fa-trash-alt"></i>
-                </div>
+              <div class="list-item-left">
+                <i class="far fa-check-square"></i>
+                <p class="task-title">Wash the dishes</p>
               </div>
-              <p class="list-item-notes not-visible">
-                These are notes for the list item.
-              </p>
+              <div class="list-item-right">
+                <p class="task-date">10/14/21</p>
+                <i class="far fa-trash-alt"></i>
+              </div>
             </li> */
 }
 

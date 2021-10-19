@@ -225,7 +225,11 @@ footer p {
   padding: 10px;
   text-align: center;
 }
-/* Hide Element CSS */
+/* Modifiers CSS */
+.complete {
+  color: lightgrey;
+  text-decoration: line-through;
+}
 .hidden {
   opacity: 0;
 }

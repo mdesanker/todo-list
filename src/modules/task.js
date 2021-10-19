@@ -21,6 +21,10 @@ class Task {
     return this.date;
   }
 
+  getCompleteStatus() {
+    return this.isComplete;
+  }
+
   changeCompleteStatus() {
     this.isComplete === false
       ? (this.isComplete = true)

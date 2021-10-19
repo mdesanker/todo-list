@@ -135,15 +135,24 @@ function updateProjectDisplay(project) {
   const taskList = project.getTasks();
   taskList.forEach((task, index) => {
     const listItem = makeElement("li", ["list-item"]);
+    // if (task.getCompleteStatus()) {
+    //   listItem.classList.add("complete");
+    // }
     listItem.dataset.id = index;
 
     // List item left side
     const listItemLeft = makeElement("div", ["list-item-left"]);
     listItemLeft.appendChild(makeElement("p", ["task-title"], task.getName()));
-    listItemLeft.insertAdjacentHTML(
-      "afterbegin",
-      '<i class="far fa-square"></i>'
-    );
+    if (task.getCompleteStatus())
+      listItemLeft.insertAdjacentHTML(
+        "afterbegin",
+        '<i class="far fa-check-square"></i>'
+      );
+    else
+      listItemLeft.insertAdjacentHTML(
+        "afterbegin",
+        '<i class="far fa-square"></i>'
+      );
 
     // List item right side
     const listItemRight = makeElement("div", ["list-item-right"]);
@@ -155,6 +164,14 @@ function updateProjectDisplay(project) {
 
     listItem.appendChild(listItemLeft);
     listItem.appendChild(listItemRight);
+
+    if (task.getCompleteStatus()) {
+      listItem.style.color = "lightgray";
+      listItem.querySelectorAll("p").forEach((item) => {
+        item.classList.add("complete");
+        console.log(item);
+      });
+    }
 
     listContainer.appendChild(listItem);
   });
@@ -181,11 +198,11 @@ function updateProjectDisplay(project) {
         .getProjectAtIndex(activeProjectIndex)
         .getTaskAtIndex(targetItem)
         .changeCompleteStatus();
-      // console.log(
-      //   toDoList
-      //     .getProjectAtIndex(activeProjectIndex)
-      //     .getTaskAtIndex(targetItem)
-      // );
+      console.log(
+        toDoList
+          .getProjectAtIndex(activeProjectIndex)
+          .getTaskAtIndex(targetItem)
+      );
       updateProjectDisplay(toDoList.getProjectAtIndex(activeProjectIndex));
     }
   });

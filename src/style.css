@@ -59,8 +59,8 @@ main {
   box-shadow: 0 0 6px var(--secondary-dark);
   min-width: 205px;
 }
-.view-container,
-.project-container {
+.default-project-container,
+.user-project-container {
   display: flex;
   flex-direction: column;
   margin: 20px 0;

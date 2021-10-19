@@ -6,7 +6,11 @@ import { ProjectList } from "./projectList";
 import { makeElement } from "./element";
 
 // ELEMENTS
-const projectContainer = document.querySelector(".project-container");
+const projectContainer = document.querySelector(".sidebar");
+const defaultProjectContainer = document.querySelector(
+  ".default-project-container"
+);
+const userProjectContainer = document.querySelector(".user-project-container");
 const addProjectBtn = document.querySelector(".add-project-btn");
 const projectFormContainer = document.querySelector(".project-form-container");
 const projectForm = document.querySelector(".add-project");
@@ -105,8 +109,8 @@ function updateProjectList() {
   // Add event listener to project list;
   projectContainer.addEventListener("click", function (e) {
     const clicked = e.target.closest("button");
-    // if (!clicked) return;
-    if (!clicked.classList.contains("project-item")) return;
+    console.log(clicked);
+    if (!clicked) return;
     const clickedIndex = e.target.closest("button").dataset.id;
 
     activeProjectIndex = clickedIndex;
@@ -117,7 +121,7 @@ function updateProjectList() {
     updateProjectDisplay(toDoList.getProjectAtIndex(clickedIndex));
   });
 
-  projectContainer.prepend(projectList);
+  userProjectContainer.prepend(projectList);
 }
 
 function updateProjectDisplay(project) {

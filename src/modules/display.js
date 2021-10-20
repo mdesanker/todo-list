@@ -101,21 +101,19 @@ function updateProjectList() {
         "afterbegin",
         '<i class="fas fa-tasks"></i>'
       );
-      projectBtn.insertAdjacentHTML(
-        "beforeend",
-        '<i class="fas fa-times-circle hidden"></i>'
-      );
       projectBtn.dataset.id = index;
       projectList.appendChild(projectBtn);
     }
   });
+
   // Add event listener to project list;
   projectContainer.addEventListener("click", function (e) {
     const clicked = e.target.closest("button");
     if (!clicked) return;
-    const clickedIndex = e.target.closest("button").dataset.id;
-    activeProjectIndex = clickedIndex;
-    updateProjectDisplay(toDoList.getProjectAtIndex(clickedIndex));
+    if (clicked.classList.contains("project-item")) {
+      activeProjectIndex = e.target.closest("button").dataset.id;
+      updateProjectDisplay(toDoList.getProjectAtIndex(activeProjectIndex));
+    }
   });
 
   userProjectContainer.prepend(projectList);

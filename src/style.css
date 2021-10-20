@@ -66,7 +66,7 @@ main {
   margin: 20px 0;
 }
 .tab-btn {
-  font-size: 22px;
+  font-size: 20px;
   padding: 10px 20px;
   margin: 5px;
   display: flex;
@@ -89,10 +89,10 @@ main {
   display: flex;
   flex-direction: column;
 }
-.project-item {
+/* .project-item {
   font-size: 18px;
   margin: 0;
-}
+} */
 /* Sidebar Form CSS */
 .add-project {
   display: flex;

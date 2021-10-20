@@ -135,9 +135,6 @@ function updateProjectDisplay(project) {
   const taskList = project.getTasks();
   taskList.forEach((task, index) => {
     const listItem = makeElement("li", ["list-item"]);
-    // if (task.getCompleteStatus()) {
-    //   listItem.classList.add("complete");
-    // }
     listItem.dataset.id = index;
 
     // List item left side
@@ -169,7 +166,6 @@ function updateProjectDisplay(project) {
       listItem.style.color = "lightgray";
       listItem.querySelectorAll("p").forEach((item) => {
         item.classList.add("complete");
-        console.log(item);
       });
     }
 
@@ -183,7 +179,6 @@ function updateProjectDisplay(project) {
     const targetItem = e.target.closest("li").dataset.id;
     // Delete item
     if (e.target.classList.contains("fa-trash-alt")) {
-      console.log(targetItem);
       toDoList
         .getProjectAtIndex(activeProjectIndex)
         .removeTaskAtIndex(targetItem);
@@ -198,11 +193,6 @@ function updateProjectDisplay(project) {
         .getProjectAtIndex(activeProjectIndex)
         .getTaskAtIndex(targetItem)
         .changeCompleteStatus();
-      console.log(
-        toDoList
-          .getProjectAtIndex(activeProjectIndex)
-          .getTaskAtIndex(targetItem)
-      );
       updateProjectDisplay(toDoList.getProjectAtIndex(activeProjectIndex));
     }
   });
@@ -230,7 +220,6 @@ taskForm.addEventListener("submit", function (e) {
   e.preventDefault();
   const newTask = new Task(taskTitleInput.value, taskDateInput.value);
 
-  // TODO: Doesn't prevent duplicate tasks
   toDoList.getProjectAtIndex(activeProjectIndex).addTask(newTask);
   closeTaskForm();
   updateProjectDisplay(toDoList.getProjectAtIndex(activeProjectIndex));

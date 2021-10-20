@@ -24,8 +24,15 @@ class Project {
     return this.taskList[index];
   }
 
+  getTaskNames() {
+    return this.taskList.map((task) => task.getName());
+  }
+
   addTask(task) {
-    if (this.taskList.includes(task)) return;
+    if (this.getTaskNames().includes(task.getName())) {
+      alert("This task already exists.");
+      return;
+    }
     this.taskList.push(task);
   }
 

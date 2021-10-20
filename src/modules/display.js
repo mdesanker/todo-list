@@ -19,7 +19,8 @@ const projectSubmitBtn = document.querySelector(".add-btn");
 const projectCancelBtn = document.querySelector(".cancel-btn");
 
 const displayContainer = document.querySelector(".display-container");
-const displayTitle = document.querySelector(".list-header");
+const displayTitle = document.querySelector(".list-title");
+const deleteProjBtn = document.querySelector(".delete-proj-btn");
 
 const addTaskBtn = document.querySelector(".add-task-btn");
 const taskFormContainer = document.querySelector(".task-form-container");
@@ -76,11 +77,11 @@ function closeTaskForm() {
 }
 
 function initializeWebsite() {
-  updateProjectList(toDoList.getProjectAtIndex(activeProjectIndex));
+  updateProjectList();
   updateProjectDisplay(toDoList.getProjectAtIndex(activeProjectIndex));
 }
 
-function updateProjectList(project) {
+function updateProjectList() {
   // Clear existing project list
   document.querySelector(".project-list").remove();
 
@@ -128,6 +129,11 @@ function updateProjectDisplay(project) {
   displayTitle.textContent = toDoList
     .getProjectAtIndex(activeProjectIndex)
     .getName();
+  if (activeProjectIndex < 2) {
+    deleteProjBtn.classList.add("not-visible");
+  } else if (activeProjectIndex >= 2) {
+    deleteProjBtn.classList.remove("not-visible");
+  }
 
   // Create new list container
   const listContainer = makeElement("ul", ["list-container"]);
@@ -209,6 +215,15 @@ projectForm.addEventListener("submit", function (e) {
     toDoList.addProject(new Project(newProject));
   else alert(`${newProject} already in use.`);
   closeProjectForm();
+  updateProjectList();
+});
+
+// Delete project
+deleteProjBtn.addEventListener("click", function () {
+  console.log("Delete project", toDoList.getProjectAtIndex(activeProjectIndex));
+  toDoList.removeProject(toDoList.getProjectAtIndex(activeProjectIndex));
+  activeProjectIndex--;
+  updateProjectDisplay(toDoList.getProjectAtIndex(activeProjectIndex));
   updateProjectList();
 });
 

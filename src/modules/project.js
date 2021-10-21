@@ -1,3 +1,5 @@
+import { toDate, isToday, format, parseISO } from "date-fns";
+
 class Project {
   constructor(name) {
     this.name = name;
@@ -42,6 +44,15 @@ class Project {
 
   removeTaskAtIndex(index) {
     this.taskList.splice(index, 1);
+  }
+
+  getTasksToday() {
+    // const today = new Date();
+    // console.log(today);
+    // console.log(isToday(today));
+    // return this.taskList.filter((task) =>
+    //   isToday(format(parseISO(task.getFormattedDate()), "MM/dd/yyyy"))
+    // );
   }
 }
 

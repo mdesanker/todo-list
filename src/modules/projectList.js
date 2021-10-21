@@ -1,4 +1,5 @@
 import { Project } from "./project";
+import { format, compareAsc, parseISO } from "date-fns";
 
 class ProjectList {
   constructor() {
@@ -9,6 +10,12 @@ class ProjectList {
 
   getProjects() {
     return this.projectList;
+  }
+
+  getProject(projectName) {
+    return this.projectList.find(
+      (project) => project.getName() === projectName
+    );
   }
 
   getProjectAtIndex(index) {
@@ -27,6 +34,11 @@ class ProjectList {
 
   removeProject(project) {
     this.projectList = this.projectList.filter((item) => item !== project);
+  }
+
+  updateTodayList() {
+    this.getProject("Today").taskList = [];
+    console.log(this.getProject("Today"));
   }
 }
 

@@ -42,6 +42,8 @@ project1.addTask(dishes);
 defaultToDo.addProject(project1);
 defaultToDo.addProject(project2);
 
+// console.log(defaultToDo.getProject("Chores").getTasksToday());
+
 // Default to "Today" project
 let activeProjectIndex = 0;
 let myToDo = defaultToDo;
@@ -52,28 +54,30 @@ function storeLocal(todoList) {
 }
 
 function retrieveLocal() {
-  console.log("default", defaultToDo.getProjectAtIndex(2).getTasks());
+  // console.log("default", defaultToDo.getProjectAtIndex(2).getTasks());
   const data = JSON.parse(localStorage.getItem("storedToDo"));
 
   if (data) {
-    console.log("storedToDo", data);
-    console.log(Object.entries(data)[0][1]);
+    // console.log("storedToDo", data);
+    // console.log(Object.entries(data)[0][1]);
     const newProjList = new ProjectList();
     Object.entries(data)[0][1].forEach((item, index) => {
-      console.log(item.taskList);
+      // console.log(item.taskList);
       const newProject = new Project(item.name);
-      console.log("item task", item.taskList);
+      // console.log("item task", item.taskList);
       item.taskList.forEach((task) => {
         const newTask = new Task(task.name, task.date);
         if (task.isComplete) newTask.changeCompleteStatus();
         newProject.addTask(newTask);
       });
+      newProject.getTasksToday;
       // newProject.setTasks(item.taskList);
-      console.log("new project", newProject);
+      // console.log("new project", newProject);
       if (index > 1) newProjList.addProject(newProject);
     });
 
-    console.log(newProjList);
+    // console.log(newProjList);
+    // newProjList.updateTodayList();
     myToDo = newProjList;
   } else myToDo = defaultToDo; // If no stored data, use default
 }
